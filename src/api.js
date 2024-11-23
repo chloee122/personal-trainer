@@ -49,8 +49,8 @@ export const editCustomer = (url, customer) => {
   return response;
 };
 
-export const getAllTrainings = () => {
-  const response = fetch(`${import.meta.env.VITE_API_URL}/trainings`).then(
+export const getTrainings = () => {
+  const response = fetch(`${import.meta.env.VITE_API_URL}/gettrainings`).then(
     (res) => checkAndParseResponse(res, "Error in fetching trainings: ")
   );
   return response;

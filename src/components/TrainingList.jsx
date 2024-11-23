@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import dayjs from "dayjs";
-import { getAllTrainings, getCustomer } from "../api";
+import { getTrainings } from "../api";
 
 function TrainingList() {
   const [trainings, setTrainings] = useState(null);
@@ -12,7 +12,9 @@ function TrainingList() {
     {
       headerName: "Customer Name",
       valueGetter: (params) => {
-        return params.data.firstname + " " + params.data.lastname;
+        return (
+          params.data.customer.firstname + " " + params.data.customer.lastname
+        );
       },
       filter: true,
       floatingFilter: true,
@@ -32,25 +34,11 @@ function TrainingList() {
   ]);
 
   const handleFetchTrainings = () => {
-    getAllTrainings()
-      .then((res) => {
-        const trainingPromises = res._embedded.trainings.map((training) => {
-          return getCustomer(training._links.customer.href).then((res) => {
-            const { firstname, lastname } = res;
-            return {
-              firstname,
-              lastname,
-              date: training.date,
-              duration: training.duration,
-              activity: training.activity,
-            };
-          });
-        });
-
-        return Promise.all(trainingPromises);
-      })
-      .then((formattedTrainings) => setTrainings(formattedTrainings))
-      .catch((error) => console.error(error.message));
+    try {
+      getTrainings().then((res) => setTrainings(res));
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   useEffect(() => {
