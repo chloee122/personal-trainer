@@ -56,9 +56,21 @@ export const getTrainings = () => {
   return response;
 };
 
-export const addTraining = () => {
-  const response = fetch(`${import.meta.env.VITE_API_URL}/trainings`).then(
-    (res) => checkAndParseResponse(res, "Error in creating training: ")
-  );
+export const addTraining = (traing) => {
+  const response = fetch(`${import.meta.env.VITE_API_URL}/trainings`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(traing),
+  }).then((res) => checkAndParseResponse(res, "Error in creating training: "));
+  return response;
+};
+
+export const deleteTraining = (id) => {
+  const response = fetch(`${import.meta.env.VITE_API_URL}/trainings/${id}`, { method: "DELETE" }).then((res) => {
+    checkAndParseResponse(res, "Error in deleting training: ");
+  });
+
   return response;
 };
