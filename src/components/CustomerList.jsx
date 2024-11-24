@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
@@ -11,6 +11,8 @@ import EditCustomerForm from "./EditCustomerForm";
 function CustomerList() {
   const [customers, setCustomers] = useState([]);
 
+  const gridRef = useRef();
+  
   const [columnDefs] = useState([
     { field: "firstname", filter: true, floatingFilter: true, flex: 1 },
     { field: "lastname", filter: true, floatingFilter: true, flex: 1 },
@@ -70,14 +72,37 @@ function CustomerList() {
     handleFetchCustomers();
   }, []);
 
+  const handleExportCSVFile = useCallback(() => {
+    gridRef.current.api.exportDataAsCsv({
+      columnKeys: [
+        "firstname",
+        "lastname",
+        "streetaddress",
+        "postcode",
+        "city",
+        "email",
+        "phone",
+      ],
+      fileName: `customers`,
+    });
+  }, []);
+
   return (
     <>
       <CustomerForm handleFetchCustomers={handleFetchCustomers} />
+      <Button
+        variant="outlined"
+        sx={{ borderRadius: "15px" }}
+        onClick={handleExportCSVFile}
+      >
+        Export CSV file
+      </Button>
       <div
         className="ag-theme-material"
         style={{ width: "100%", height: "90vh" }}
       >
         <AgGridReact
+          ref={gridRef}
           rowData={customers}
           columnDefs={columnDefs}
           pagination={true}
