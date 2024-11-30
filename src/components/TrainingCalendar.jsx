@@ -20,21 +20,23 @@ function TrainingCalendar() {
   };
 
   const calendarEvents = trainings.map((training) => {
-    const {
-      activity,
-      date,
-      duration,
-      customer: { firstname, lastname },
-    } = training;
+    if (training.customer) {
+      const {
+        activity,
+        date,
+        duration,
+        customer: { firstname, lastname },
+      } = training;
 
-    const endDate = new Date(date);
-    endDate.setMinutes(endDate.getMinutes() + duration);
+      const endDate = new Date(date);
+      endDate.setMinutes(endDate.getMinutes() + duration);
 
-    return {
-      title: `${activity} / ${firstname} ${lastname}`,
-      start: new Date(date),
-      end: endDate,
-    };
+      return {
+        title: `${activity} / ${firstname} ${lastname}`,
+        start: new Date(date),
+        end: endDate,
+      };
+    }
   });
 
   const localizer = momentLocalizer(moment);

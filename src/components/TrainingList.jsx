@@ -15,9 +15,10 @@ function TrainingList() {
     {
       headerName: "Customer Name",
       valueGetter: (params) => {
-        return (
-          params.data.customer.firstname + " " + params.data.customer.lastname
-        );
+        if (params.data.customer)
+          return (
+            params.data.customer.firstname + " " + params.data.customer.lastname
+          );
       },
       filter: true,
       floatingFilter: true,
@@ -36,7 +37,6 @@ function TrainingList() {
     { field: "activity", filter: true, floatingFilter: true, flex: 1 },
     {
       cellRenderer: (params) => {
-        console.log(params);
         return (
           <Button
             color="error"

@@ -24,6 +24,15 @@ function CustomerForm({ handleFetchCustomers }) {
 
   const handleCloseForm = () => {
     setShowAddCustomerForm(false);
+    setCustomer({
+      firstname: "",
+      lastname: "",
+      streetaddress: "",
+      postcode: "",
+      city: "",
+      email: "",
+      phone: "",
+    });
   };
 
   const handleCreateCustomer = () => {

@@ -1,4 +1,11 @@
-import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import {
+  BarChart,
+  Bar,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
 import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { getTrainings } from "../api";
@@ -33,7 +40,6 @@ function TrainingStatistics() {
       <ResponsiveContainer height="85%">
         <BarChart data={data} barSize={150}>
           <XAxis dataKey="name" />
-
           <YAxis
             label={{
               value: "Duration (min)",
@@ -43,6 +49,7 @@ function TrainingStatistics() {
               fontSize: 20,
             }}
           />
+          <Tooltip />
           <Bar dataKey="duration" fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>

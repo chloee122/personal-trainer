@@ -33,6 +33,7 @@ function AddTrainingForm({ handleFetchTrainings }) {
   const handleCloseForm = () => {
     setShowAddTrainingForm(false);
     setCustomerName("");
+    setTraining({ date: null, duration: "", activity: "", customer: "" });
   };
 
   const handleSelect = (e) => {
@@ -56,7 +57,9 @@ function AddTrainingForm({ handleFetchTrainings }) {
 
   useEffect(() => {
     try {
-      getAllCustomers().then((res) => setCustomers(res._embedded.customers));
+      getAllCustomers().then((res) => {
+        setCustomers(res._embedded.customers);
+      });
     } catch (error) {
       console.error(error.message);
     }

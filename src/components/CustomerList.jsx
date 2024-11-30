@@ -12,15 +12,57 @@ function CustomerList() {
   const [customers, setCustomers] = useState([]);
 
   const gridRef = useRef();
-  
+
   const [columnDefs] = useState([
-    { field: "firstname", filter: true, floatingFilter: true, flex: 1 },
-    { field: "lastname", filter: true, floatingFilter: true, flex: 1 },
-    { field: "streetaddress", filter: true, floatingFilter: true, flex: 1 },
-    { field: "postcode", filter: true, floatingFilter: true, flex: 1 },
-    { field: "city", filter: true, floatingFilter: true, flex: 1 },
-    { field: "email", filter: true, floatingFilter: true, flex: 1 },
-    { field: "phone", filter: true, floatingFilter: true, flex: 1 },
+    {
+      field: "firstname",
+      headerName: "First Name",
+      filter: true,
+      floatingFilter: true,
+      flex: 1,
+    },
+    {
+      field: "lastname",
+      headerName: "Last Name",
+      filter: true,
+      floatingFilter: true,
+      flex: 1,
+    },
+    {
+      field: "streetaddress",
+      headerName: "Street Address",
+      filter: true,
+      floatingFilter: true,
+      flex: 1,
+    },
+    {
+      field: "postcode",
+      headerName: "Post Code",
+      filter: true,
+      floatingFilter: true,
+      flex: 1,
+    },
+    {
+      field: "city",
+      headerName: "City",
+      filter: true,
+      floatingFilter: true,
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      filter: true,
+      floatingFilter: true,
+      flex: 1,
+    },
+    {
+      field: "phone",
+      headerName: "Phone",
+      filter: true,
+      floatingFilter: true,
+      flex: 1,
+    },
     {
       cellRenderer: (params) => {
         return (
@@ -99,7 +141,7 @@ function CustomerList() {
       </Button>
       <div
         className="ag-theme-material"
-        style={{ width: "100%", height: "90vh" }}
+        style={{ width: "100%", height: "85vh" }}
       >
         <AgGridReact
           ref={gridRef}
